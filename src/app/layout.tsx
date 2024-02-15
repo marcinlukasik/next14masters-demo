@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/ui/molecules/Navbar";
+import { SectionWrapper } from "@/ui/atoms/SectionWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +19,8 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className} suppressHydrationWarning={true}>
-				{children}
+				<Navbar />
+				<SectionWrapper className="py-12">{children}</SectionWrapper>
 			</body>
 		</html>
 	);
