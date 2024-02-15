@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getProductById } from "@/api/products";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
+import { ProductListItemCoverImage } from "@/ui/atoms/ProductListItemCoverImage";
+import { ProductListItemDescription } from "@/ui/atoms/ProductListItemDescription";
 
 export async function generateMetadata({
 	params,
@@ -34,11 +36,12 @@ export default async function SingleProductPage({
 	const product = await getProductById(params.productId);
 
 	return (
-		<div className="max-w-md">
+		<article className="max-w-md">
 			<h1 className="mb-5 text-lg font-medium text-gray-900">
 				{product.name}
 			</h1>
-			<ProductListItem product={product} />
-		</div>
+			<ProductListItemCoverImage {...product.coverImage} />
+			<ProductListItemDescription product={product} />
+		</article>
 	);
 }
