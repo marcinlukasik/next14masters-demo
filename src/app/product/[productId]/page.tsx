@@ -36,11 +36,14 @@ export default async function SingleProductPage({
 
 	return (
 		<article className="max-w-md">
-			<h1 className="mb-5 text-lg font-medium text-gray-900">
+			<h1 className="mb-8 text-xl font-semibold leading-6 text-gray-900">
 				{product.name}
 			</h1>
 			<ProductListItemCoverImage {...product.coverImage} />
 			<ProductListItemDescription product={product} />
+			<p className="mt-4 text-sm text-gray-900">
+				{product.description}
+			</p>
 		</article>
 	);
 }

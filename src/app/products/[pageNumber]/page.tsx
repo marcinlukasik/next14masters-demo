@@ -20,6 +20,9 @@ export default async function ProductsPage({
 
 	return (
 		<>
+			<h3 className="mb-8 text-xl font-semibold leading-6 text-gray-900">
+				All products
+			</h3>
 			<ProductList products={products} />
 			<Pagination total={total} take={take} />
 		</>
