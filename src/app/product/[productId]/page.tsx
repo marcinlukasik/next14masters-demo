@@ -1,14 +1,21 @@
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getProductById } from "@/api/products";
-import { ProductListItemCoverImage } from "@/ui/atoms/ProductListItemCoverImage";
-import { ProductListItemDescription } from "@/ui/atoms/ProductListItemDescription";
+import { executeGraphql } from "@/api/graphqlApi";
+import { ProductsGetItemDocument } from "@/gql/graphql";
+import { SingleProduct } from "@/ui/organism/SingleProduct";
 
 export async function generateMetadata({
 	params,
 }: {
 	params: { productId: string };
 }): Promise<Metadata> {
-	const product = await getProductById(params.productId);
+	const { product } = await executeGraphql(ProductsGetItemDocument, {
+		id: params.productId,
+	});
+
+	if (!product) {
+		return {};
+	}
 
 	return {
 		title: product.name,
@@ -17,12 +24,10 @@ export async function generateMetadata({
 			title: product.name,
 			description: product.description,
 			type: "website",
-			images: [
-				{
-					url: product.coverImage.src,
-					alt: product.name,
-				},
-			],
+			images: product.images.map((image) => ({
+				url: image.url,
+				alt: image.alt,
+			})),
 		},
 	};
 }
@@ -32,18 +37,13 @@ export default async function SingleProductPage({
 }: {
 	params: { productId: string };
 }) {
-	const product = await getProductById(params.productId);
+	const { product } = await executeGraphql(ProductsGetItemDocument, {
+		id: params.productId,
+	});
 
-	return (
-		<article className="max-w-md">
-			<h1 className="mb-8 text-xl font-semibold leading-6 text-gray-900">
-				{product.name}
-			</h1>
-			<ProductListItemCoverImage {...product.coverImage} />
-			<ProductListItemDescription product={product} />
-			<p className="mt-4 text-sm text-gray-900">
-				{product.description}
-			</p>
-		</article>
-	);
+	if (!product) {
+		throw notFound();
+	}
+
+	return <SingleProduct product={product} />;
 }

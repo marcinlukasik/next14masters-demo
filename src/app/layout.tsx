@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import clsx from "clsx";
 import { Navbar } from "@/ui/molecules/Navbar";
-import { SectionWrapper } from "@/ui/atoms/SectionWrapper";
+import { Footer } from "@/ui/molecules/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,18 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={inter.className} suppressHydrationWarning={true}>
+			<body
+				className={clsx(
+					"flex min-h-screen flex-col",
+					inter.className,
+				)}
+				suppressHydrationWarning={true}
+			>
 				<Navbar />
-				<SectionWrapper className="py-12">{children}</SectionWrapper>
+				<main className="mx-auto w-full max-w-2xl px-8 py-12 md:max-w-4xl lg:max-w-7xl">
+					{children}
+				</main>
+				<Footer />
 			</body>
 		</html>
 	);

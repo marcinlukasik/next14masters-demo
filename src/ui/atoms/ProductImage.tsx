@@ -1,21 +1,23 @@
 import NextImage from "next/image";
 
-type ProductListItemCoverImageProps = {
-	src: string;
-	alt: string;
-};
-
-export const ProductListItemCoverImage = ({
+export const ProductImage = ({
 	src,
 	alt,
-}: ProductListItemCoverImageProps) => {
+	width = 320,
+	height = 480,
+}: {
+	src: string;
+	alt: string;
+	width: number;
+	height: number;
+}) => {
 	return (
 		<div className="relative aspect-square overflow-hidden rounded-lg">
 			<NextImage
 				src={src}
 				alt={alt}
-				width="320"
-				height="480"
+				width={width}
+				height={height}
 				className="h-full w-full object-cover object-center group-hover:opacity-60"
 			/>
 		</div>
