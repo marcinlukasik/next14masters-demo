@@ -272,7 +272,7 @@ export type SortDirection =
   | 'ASC'
   | 'DESC';
 
-export type CollectionListItemFragmentFragment = { name: string, description: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> };
+export type CollectionListItemFragmentFragment = { name: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> };
 
 export type CollectionsGetListQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -280,7 +280,7 @@ export type CollectionsGetListQueryVariables = Exact<{
 }>;
 
 
-export type CollectionsGetListQuery = { collections: { data: Array<{ name: string, description: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> }> } };
+export type CollectionsGetListQuery = { collections: { data: Array<{ name: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> }> } };
 
 export type ProductListItemFragmentFragment = { name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> };
 
@@ -347,6 +347,7 @@ export const CollectionListItemFragmentFragmentDoc = new TypedDocumentString(`
     fragment CollectionListItemFragment on Collection {
   name
   description
+  slug
   products {
     ...ProductListItemFragment
   }
@@ -376,6 +377,7 @@ export const CollectionsGetListDocument = new TypedDocumentString(`
     fragment CollectionListItemFragment on Collection {
   name
   description
+  slug
   products {
     ...ProductListItemFragment
   }
