@@ -1,16 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	logging: {
+		fetches: {
+			fullUrl: true,
+		},
+	},
 	experimental: {
 		typedRoutes: true,
 	},
 	images: {
-		domains: [
-			"naszsklep-api.vercel.app",
-			"static-ourstore.hyperfunctor.com",
-		],
+		domains: ["static-ourstore.hyperfunctor.com"],
 	},
 	async redirects() {
 		return [
+			...["t-shirts", "hoodies", "accessories"].map((category) => ({
+				source: `/categories/${category}`,
+				destination: `/categories/${category}/1`,
+				permanent: false,
+			})),
 			{
 				source: "/products",
 				destination: "/products/1",

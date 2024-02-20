@@ -39,7 +39,7 @@ export const Navbar = () => {
 								</li>
 								<li>
 									<ActiveLink
-										href="/products"
+										href="/categories/t-shirts"
 										className={className}
 										activeClassName={activeClassName}
 									>
@@ -48,7 +48,7 @@ export const Navbar = () => {
 								</li>
 								<li>
 									<ActiveLink
-										href="/products"
+										href="/categories/hoodies"
 										className={className}
 										activeClassName={activeClassName}
 									>
@@ -57,7 +57,7 @@ export const Navbar = () => {
 								</li>
 								<li>
 									<ActiveLink
-										href="/products"
+										href="/categories/accessories"
 										className={className}
 										activeClassName={activeClassName}
 									>

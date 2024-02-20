@@ -9,5 +9,6 @@ fragment ProductListItemFragment on Product {
 	description
 	categories {
 		name
+		slug
 	}
 }

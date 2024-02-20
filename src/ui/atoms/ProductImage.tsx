@@ -18,7 +18,7 @@ export const ProductImage = ({
 				alt={alt}
 				width={width}
 				height={height}
-				className="h-full w-full object-cover object-center group-hover:opacity-60"
+				className="h-full w-full object-cover object-center transition-opacity duration-200 group-hover:opacity-60"
 			/>
 		</div>
 	);

@@ -1,5 +1,6 @@
 import { executeGraphql } from "@/api/graphqlApi";
 import { ProductsGetListDocument } from "@/gql/graphql";
+import { Heading } from "@/ui/atoms/Heading";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organism/ProductList";
 
@@ -31,9 +32,7 @@ export default async function ProductsPage({
 
 	return (
 		<>
-			<h3 className="mb-8 text-xl font-semibold leading-6 text-gray-900">
-				All products
-			</h3>
+			<Heading>All products</Heading>
 			<ProductList products={products.data} />
 			<Pagination total={total} take={take} />
 		</>

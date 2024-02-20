@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { executeGraphql } from "@/api/graphqlApi";
 import { ProductsGetItemDocument } from "@/gql/graphql";
 import { SingleProduct } from "@/ui/organism/SingleProduct";
+import { RelatedProductList } from "@/ui/organism/RelatedProductList";
 
 export async function generateMetadata({
 	params,
@@ -42,8 +44,19 @@ export default async function SingleProductPage({
 	});
 
 	if (!product) {
-		throw notFound();
+		notFound();
 	}
 
-	return <SingleProduct product={product} />;
+	return (
+		<>
+			<SingleProduct product={product} />
+			<Suspense>
+				<RelatedProductList
+					slug={
+						product.categories[0] ? product.categories[0].slug : ""
+					}
+				/>
+			</Suspense>
+		</>
+	);
 }

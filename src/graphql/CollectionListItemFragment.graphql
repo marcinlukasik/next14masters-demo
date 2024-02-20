@@ -1,0 +1,7 @@
+fragment CollectionListItemFragment on Collection {
+	name
+	description
+	products {
+		...ProductListItemFragment
+	}
+}
