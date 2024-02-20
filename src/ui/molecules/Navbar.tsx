@@ -10,7 +10,7 @@ export const Navbar = () => {
 	const activeClassName = "text-orange-600";
 
 	return (
-		<header className="sticky top-0 z-50 bg-white bg-opacity-95 py-3 text-black shadow-sm">
+		<header className="sticky top-0 z-50 bg-white py-3 text-black shadow-sm">
 			<nav className="mx-auto max-w-2xl md:max-w-4xl lg:max-w-7xl lg:px-8">
 				<div className="flex flex-col justify-between lg:flex-row lg:items-center">
 					<div className="scroll-shadows flex items-center overflow-x-scroll scroll-smooth pb-3 lg:mx-0 lg:overflow-x-auto lg:pb-0">

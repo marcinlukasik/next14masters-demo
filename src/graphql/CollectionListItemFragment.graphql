@@ -4,6 +4,17 @@ fragment CollectionListItemFragment on Collection {
 	description
 	slug
 	products {
-		...ProductListItemFragment
+		name
+		price
+		images {
+			alt
+			url
+		}
+		id
+		description
+		categories {
+			name
+			slug
+		}
 	}
 }

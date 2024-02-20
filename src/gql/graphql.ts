@@ -327,6 +327,28 @@ export class TypedDocumentString<TResult, TVariables>
     return this.value;
   }
 }
+export const CollectionListItemFragmentFragmentDoc = new TypedDocumentString(`
+    fragment CollectionListItemFragment on Collection {
+  name
+  id
+  description
+  slug
+  products {
+    name
+    price
+    images {
+      alt
+      url
+    }
+    id
+    description
+    categories {
+      name
+      slug
+    }
+  }
+}
+    `, {"fragmentName":"CollectionListItemFragment"}) as unknown as TypedDocumentString<CollectionListItemFragmentFragment, unknown>;
 export const ProductListItemFragmentFragmentDoc = new TypedDocumentString(`
     fragment ProductListItemFragment on Product {
   name
@@ -343,61 +365,32 @@ export const ProductListItemFragmentFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductListItemFragment"}) as unknown as TypedDocumentString<ProductListItemFragmentFragment, unknown>;
-export const CollectionListItemFragmentFragmentDoc = new TypedDocumentString(`
-    fragment CollectionListItemFragment on Collection {
-  name
-  id
-  description
-  slug
-  products {
-    ...ProductListItemFragment
-  }
-}
-    fragment ProductListItemFragment on Product {
-  name
-  price
-  images {
-    alt
-    url
-  }
-  id
-  description
-  categories {
-    name
-    slug
-  }
-}`, {"fragmentName":"CollectionListItemFragment"}) as unknown as TypedDocumentString<CollectionListItemFragmentFragment, unknown>;
 export const CollectionsGetListDocument = new TypedDocumentString(`
     query CollectionsGetList($take: Int, $skip: Int) {
   collections(take: $take, skip: $skip) {
     data {
-      ...CollectionListItemFragment
+      name
+      id
+      description
+      slug
+      products {
+        name
+        price
+        images {
+          alt
+          url
+        }
+        id
+        description
+        categories {
+          name
+          slug
+        }
+      }
     }
   }
 }
-    fragment CollectionListItemFragment on Collection {
-  name
-  id
-  description
-  slug
-  products {
-    ...ProductListItemFragment
-  }
-}
-fragment ProductListItemFragment on Product {
-  name
-  price
-  images {
-    alt
-    url
-  }
-  id
-  description
-  categories {
-    name
-    slug
-  }
-}`) as unknown as TypedDocumentString<CollectionsGetListQuery, CollectionsGetListQueryVariables>;
+    `) as unknown as TypedDocumentString<CollectionsGetListQuery, CollectionsGetListQueryVariables>;
 export const ProductsGetListByCollectionSlugDocument = new TypedDocumentString(`
     query ProductsGetListByCollectionSlug($slug: String!) {
   collection(slug: $slug) {
@@ -410,21 +403,18 @@ export const ProductsGetListByCollectionSlugDocument = new TypedDocumentString(`
   description
   slug
   products {
-    ...ProductListItemFragment
-  }
-}
-fragment ProductListItemFragment on Product {
-  name
-  price
-  images {
-    alt
-    url
-  }
-  id
-  description
-  categories {
     name
-    slug
+    price
+    images {
+      alt
+      url
+    }
+    id
+    description
+    categories {
+      name
+      slug
+    }
   }
 }`) as unknown as TypedDocumentString<ProductsGetListByCollectionSlugQuery, ProductsGetListByCollectionSlugQueryVariables>;
 export const ProductsGetItemDocument = new TypedDocumentString(`
