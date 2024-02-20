@@ -4,11 +4,29 @@ import { Heading } from "@/ui/atoms/Heading";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organism/ProductList";
 
+const takeParam = 4;
+
 export async function generateStaticParams() {
 	const { products } = await executeGraphql(ProductsGetListDocument, {
 		take: 0,
 	});
-	return products.data.map((_product) => ({ pageNumber: "1" }));
+
+	const numberOfStaticPages = 3;
+	const total = products.data.length;
+
+	if (total <= 0) {
+		return [];
+	}
+
+	const numberOfAllPages = Math.ceil(total / takeParam);
+
+	const loopCount = Math.min(numberOfStaticPages, numberOfAllPages);
+
+	return Array.from({ length: loopCount }, (_value, index) => {
+		return {
+			pageNumber: (index + 1).toString(),
+		};
+	});
 }
 
 export default async function ProductsPage({
@@ -16,11 +34,10 @@ export default async function ProductsPage({
 }: {
 	params: { pageNumber: string };
 }) {
-	const take = 10;
-	const skip = (Number(params.pageNumber) - 1) * take;
+	const skip = (Number(params.pageNumber) - 1) * takeParam;
 
 	const { products } = await executeGraphql(ProductsGetListDocument, {
-		take,
+		take: takeParam,
 		skip,
 	});
 
@@ -34,7 +51,7 @@ export default async function ProductsPage({
 		<>
 			<Heading>All products</Heading>
 			<ProductList products={products.data} />
-			<Pagination total={total} take={take} />
+			<Pagination total={total} take={takeParam} route="/products" />
 		</>
 	);
 }

@@ -4,9 +4,11 @@ import { ActiveLink } from "@/ui/atoms/ActiveLink";
 export const Pagination = ({
 	total,
 	take,
+	route,
 }: {
 	take: number;
 	total: number;
+	route: Route;
 }) => {
 	return (
 		take > 0 && (
@@ -22,7 +24,7 @@ export const Pagination = ({
 						return (
 							<li key={index}>
 								<ActiveLink
-									href={`/products/${index + 1}` as Route}
+									href={`${route}/${index + 1}` as Route}
 									className={
 										"text-md p-2 font-medium text-gray-700 transition-colors duration-300 ease-in-out hover:text-orange-500"
 									}

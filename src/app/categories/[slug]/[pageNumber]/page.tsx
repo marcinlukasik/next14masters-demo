@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { type Route } from "next";
 import { executeGraphql } from "@/api/graphqlApi";
 import { ProductsGetListByCategorySlugDocument } from "@/gql/graphql";
 import { Pagination } from "@/ui/molecules/Pagination";
@@ -30,7 +31,11 @@ export default async function SingleCategoryPage({
 		<>
 			<Heading>{category.name}</Heading>
 			<ProductList products={category.products} />
-			<Pagination total={total} take={take} />
+			<Pagination
+				total={total}
+				take={take}
+				route={`/categories/${params.slug}` as Route}
+			/>
 		</>
 	);
 }
