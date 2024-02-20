@@ -272,7 +272,7 @@ export type SortDirection =
   | 'ASC'
   | 'DESC';
 
-export type CollectionListItemFragmentFragment = { name: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> };
+export type CollectionListItemFragmentFragment = { name: string, id: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> };
 
 export type CollectionsGetListQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -280,7 +280,7 @@ export type CollectionsGetListQueryVariables = Exact<{
 }>;
 
 
-export type CollectionsGetListQuery = { collections: { data: Array<{ name: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> }> } };
+export type CollectionsGetListQuery = { collections: { data: Array<{ name: string, id: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> }> } };
 
 export type ProductListItemFragmentFragment = { name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> };
 
@@ -289,7 +289,7 @@ export type ProductsGetListByCollectionSlugQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetListByCollectionSlugQuery = { collection?: { name: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> } | null };
+export type ProductsGetListByCollectionSlugQuery = { collection?: { name: string, id: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> } | null };
 
 export type ProductsGetItemQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -346,6 +346,7 @@ export const ProductListItemFragmentFragmentDoc = new TypedDocumentString(`
 export const CollectionListItemFragmentFragmentDoc = new TypedDocumentString(`
     fragment CollectionListItemFragment on Collection {
   name
+  id
   description
   slug
   products {
@@ -376,6 +377,7 @@ export const CollectionsGetListDocument = new TypedDocumentString(`
 }
     fragment CollectionListItemFragment on Collection {
   name
+  id
   description
   slug
   products {
@@ -399,15 +401,19 @@ fragment ProductListItemFragment on Product {
 export const ProductsGetListByCollectionSlugDocument = new TypedDocumentString(`
     query ProductsGetListByCollectionSlug($slug: String!) {
   collection(slug: $slug) {
-    name
-    description
-    slug
-    products {
-      ...ProductListItemFragment
-    }
+    ...CollectionListItemFragment
   }
 }
-    fragment ProductListItemFragment on Product {
+    fragment CollectionListItemFragment on Collection {
+  name
+  id
+  description
+  slug
+  products {
+    ...ProductListItemFragment
+  }
+}
+fragment ProductListItemFragment on Product {
   name
   price
   images {

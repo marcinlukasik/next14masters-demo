@@ -1,5 +1,6 @@
 fragment CollectionListItemFragment on Collection {
 	name
+	id
 	description
 	slug
 	products {
