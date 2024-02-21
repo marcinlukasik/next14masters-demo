@@ -13,6 +13,11 @@ const nextConfig = {
 	},
 	async redirects() {
 		return [
+			{
+				source: "/categories",
+				destination: "/categories/t-shirts/1",
+				permanent: true,
+			},
 			...["t-shirts", "hoodies", "accessories"].map((category) => ({
 				source: `/categories/${category}`,
 				destination: `/categories/${category}/1`,
