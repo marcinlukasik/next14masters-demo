@@ -7,8 +7,8 @@ import { SearchBar } from "@/ui/atoms/SearchBar";
 
 export const Navbar = () => {
 	const className =
-		"text-sm font-medium text-gray-700 transition-colors duration-300 ease-in-out hover:text-orange-500 flex h-full items-center";
-	const activeClassName = "text-orange-600";
+		"text-sm font-medium text-gray-700 transition-colors duration-300 ease-in-out hover:text-orange-500 flex h-full items-center border-y-2 border-transparent";
+	const activeClassName = "text-orange-600 border-orange-500";
 
 	return (
 		<header className="sticky top-0 z-50 bg-white py-3 text-black shadow-sm">
