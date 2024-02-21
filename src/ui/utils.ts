@@ -4,3 +4,12 @@ export const formatPrice = (price: number) => {
 		currency: "PLN",
 	}).format(price / 100);
 };
+
+export const debounce = (callback: () => void, delay: number) => {
+	let timeoutId: ReturnType<typeof setTimeout>;
+
+	return function () {
+		clearTimeout(timeoutId);
+		timeoutId = setTimeout(callback, delay);
+	};
+};
