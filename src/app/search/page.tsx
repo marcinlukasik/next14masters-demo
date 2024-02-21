@@ -1,5 +1,6 @@
 import { executeGraphql } from "@/api/graphqlApi";
 import { ProductsGetListBySearchDocument } from "@/gql/graphql";
+import { searchCharactersLimit } from "@/ui/constants";
 import { ProductList } from "@/ui/organism/ProductList";
 
 export default async function SearchPage({
@@ -8,7 +9,8 @@ export default async function SearchPage({
 	searchParams: { query: string };
 }) {
 	const { products } =
-		searchParams.query && searchParams.query.length >= 2
+		searchParams.query &&
+		searchParams.query.length >= searchCharactersLimit
 			? await executeGraphql(ProductsGetListBySearchDocument, {
 					search: searchParams.query,
 				})

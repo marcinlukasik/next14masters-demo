@@ -11,9 +11,6 @@ export default async function SingleCategoryPage({
 }: {
 	params: { slug: string; pageNumber: string };
 }) {
-	const take = 10;
-	// const skip = (Number(params.pageNumber) - 1) * take;
-
 	const { category } = await executeGraphql(
 		ProductsGetListByCategorySlugDocument,
 		{
@@ -33,7 +30,7 @@ export default async function SingleCategoryPage({
 			<ProductList products={category.products} />
 			<Pagination
 				total={total}
-				take={take}
+				itemsPerPage={10}
 				route={`/categories/${params.slug}` as Route}
 			/>
 		</>

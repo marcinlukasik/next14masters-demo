@@ -1,10 +1,9 @@
 import { executeGraphql } from "@/api/graphqlApi";
 import { ProductsGetListDocument } from "@/gql/graphql";
 import { Heading } from "@/ui/atoms/Heading";
+import { paginationItemsPerPage } from "@/ui/constants";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organism/ProductList";
-
-const takeParam = 4;
 
 export async function generateStaticParams() {
 	const { products } = await executeGraphql(ProductsGetListDocument, {
@@ -18,7 +17,7 @@ export async function generateStaticParams() {
 		return [];
 	}
 
-	const numberOfAllPages = Math.ceil(total / takeParam);
+	const numberOfAllPages = Math.ceil(total / paginationItemsPerPage);
 
 	const loopCount = Math.min(numberOfStaticPages, numberOfAllPages);
 
@@ -34,24 +33,23 @@ export default async function ProductsPage({
 }: {
 	params: { pageNumber: string };
 }) {
-	const skip = (Number(params.pageNumber) - 1) * takeParam;
+	const skip =
+		(Number(params.pageNumber) - 1) * paginationItemsPerPage;
 
 	const { products } = await executeGraphql(ProductsGetListDocument, {
-		take: takeParam,
+		take: paginationItemsPerPage,
 		skip,
 	});
-
-	const allProducts = await executeGraphql(ProductsGetListDocument, {
-		take: 0,
-	});
-
-	const total = allProducts.products.data.length;
 
 	return (
 		<>
 			<Heading>All products</Heading>
 			<ProductList products={products.data} />
-			<Pagination total={total} take={takeParam} route="/products" />
+			<Pagination
+				total={products.meta.total}
+				itemsPerPage={paginationItemsPerPage}
+				route="/products"
+			/>
 		</>
 	);
 }

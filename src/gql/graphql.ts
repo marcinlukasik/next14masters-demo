@@ -304,7 +304,7 @@ export type ProductsGetListQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetListQuery = { products: { data: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> } };
+export type ProductsGetListQuery = { products: { data: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }>, meta: { total: number } } };
 
 export type ProductsGetListByCategorySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -449,6 +449,9 @@ export const ProductsGetListDocument = new TypedDocumentString(`
   products(take: $take, skip: $skip) {
     data {
       ...ProductListItemFragment
+    }
+    meta {
+      total
     }
   }
 }
