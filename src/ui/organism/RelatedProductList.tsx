@@ -17,7 +17,7 @@ export const RelatedProductList = async ({
 
 	return (
 		category && (
-			<div className="mb-20 mt-10">
+			<div className="mb-20 mt-10" data-testid="related-products">
 				<Heading>Related products</Heading>
 				<ProductList products={category.products.slice(0, 4)} />
 			</div>
