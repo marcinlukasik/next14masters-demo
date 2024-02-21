@@ -57,7 +57,7 @@ export const Navbar = () => {
 										Categories
 									</ActiveLink>
 								</li>
-								<li>
+								{/* <li>
 									<ActiveLink
 										href={"/categories/t-shirts" as Route}
 										className={className}
@@ -83,7 +83,7 @@ export const Navbar = () => {
 									>
 										Accessories
 									</ActiveLink>
-								</li>
+								</li> */}
 							</ul>
 						</div>
 					</div>
