@@ -272,6 +272,16 @@ export type SortDirection =
   | 'ASC'
   | 'DESC';
 
+export type CategoriesGetListQueryVariables = Exact<{
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type CategoriesGetListQuery = { categories: { data: Array<{ id: string, name: string, slug: string, description: string }> } };
+
+export type CategoryListItemFragmentFragment = { id: string, name: string, slug: string, description: string };
+
 export type CollectionListItemFragmentFragment = { name: string, id: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> };
 
 export type CollectionsGetListQueryVariables = Exact<{
@@ -334,6 +344,14 @@ export class TypedDocumentString<TResult, TVariables>
     return this.value;
   }
 }
+export const CategoryListItemFragmentFragmentDoc = new TypedDocumentString(`
+    fragment CategoryListItemFragment on Category {
+  id
+  name
+  slug
+  description
+}
+    `, {"fragmentName":"CategoryListItemFragment"}) as unknown as TypedDocumentString<CategoryListItemFragmentFragment, unknown>;
 export const CollectionListItemFragmentFragmentDoc = new TypedDocumentString(`
     fragment CollectionListItemFragment on Collection {
   name
@@ -372,6 +390,20 @@ export const ProductListItemFragmentFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductListItemFragment"}) as unknown as TypedDocumentString<ProductListItemFragmentFragment, unknown>;
+export const CategoriesGetListDocument = new TypedDocumentString(`
+    query CategoriesGetList($take: Int, $skip: Int) {
+  categories(take: $take, skip: $skip) {
+    data {
+      ...CategoryListItemFragment
+    }
+  }
+}
+    fragment CategoryListItemFragment on Category {
+  id
+  name
+  slug
+  description
+}`) as unknown as TypedDocumentString<CategoriesGetListQuery, CategoriesGetListQueryVariables>;
 export const CollectionsGetListDocument = new TypedDocumentString(`
     query CollectionsGetList($take: Int, $skip: Int) {
   collections(take: $take, skip: $skip) {

@@ -23,7 +23,8 @@ export const ActiveLink = ({
 	const isActive =
 		exact || href === "/"
 			? pathname === href
-			: pathname.startsWith(href);
+			: // : pathname.startsWith(href);
+				href.slice(1) === pathname.split("/")[1];
 	const isAriaCurrent = isActive ? "page" : undefined;
 
 	return (

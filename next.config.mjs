@@ -9,20 +9,18 @@ const nextConfig = {
 		typedRoutes: true,
 	},
 	images: {
-		domains: ["static-ourstore.hyperfunctor.com"],
+		domains: [
+			"static-ourstore.hyperfunctor.com",
+			"images.unsplash.com",
+		],
 	},
 	async redirects() {
 		return [
 			{
-				source: "/categories",
-				destination: "/categories/t-shirts/1",
-				permanent: true,
-			},
-			...["t-shirts", "hoodies", "accessories"].map((category) => ({
-				source: `/categories/${category}`,
-				destination: `/categories/${category}/1`,
+				source: "/categories/:slug",
+				destination: "/categories/:slug/1",
 				permanent: false,
-			})),
+			},
 			{
 				source: "/products",
 				destination: "/products/1",

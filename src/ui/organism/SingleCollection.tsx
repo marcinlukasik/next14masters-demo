@@ -12,11 +12,11 @@ export const SingleCollection = ({
 				Collection
 			</p>
 			<h1 className="mb-6 mt-1 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-				{collection.description} {collection.name}
+				{collection.name}
 			</h1>
-			{/* <p className="mb-12 text-lg leading-8 text-gray-600">
+			<p className="mb-12 text-lg leading-8 text-gray-600">
 				{collection.description}
-			</p> */}
+			</p>
 			<ProductList products={collection.products} />
 		</>
 	);
