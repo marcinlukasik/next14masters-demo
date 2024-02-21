@@ -16,7 +16,7 @@ export const CollectionListItem = ({
 						className="group"
 					>
 						<h3 className="flex text-base text-orange-500">
-							{collection.name}{" "}
+							{collection.name}
 							<ChevronsRight className="translate-x-1 transition-transform duration-200 group-hover:translate-x-2" />
 						</h3>
 					</Link>
