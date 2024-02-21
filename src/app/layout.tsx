@@ -20,10 +20,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={clsx(
-					"flex min-h-screen flex-col",
-					inter.className,
-				)}
+				className={clsx("flex min-h-dvh flex-col", inter.className)}
 				suppressHydrationWarning={true}
 			>
 				<Navbar />
