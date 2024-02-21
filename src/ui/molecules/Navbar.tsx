@@ -8,8 +8,10 @@ import { SearchBar } from "@/ui/atoms/SearchBar";
 export const Navbar = () => {
 	const className =
 		"text-sm font-medium text-gray-700 transition-colors duration-300 ease-in-out hover:text-orange-500 flex h-full items-center";
+	const inactiveClassName =
+		"border-b-2 border-t-2 border-transparent";
 	const activeClassName =
-		"text-orange-600 border-b-2 border-orange-500";
+		"text-orange-600 border-b-2 border-t-2 border-orange-500";
 
 	return (
 		<header className="sticky top-0 z-50 bg-white py-3 text-black shadow-sm">
@@ -24,6 +26,7 @@ export const Navbar = () => {
 								<li>
 									<ActiveLink
 										href="/"
+										inactiveClassName={inactiveClassName}
 										activeClassName={activeClassName}
 										className={className}
 									>
@@ -34,6 +37,7 @@ export const Navbar = () => {
 									<ActiveLink
 										href="/products"
 										className={className}
+										inactiveClassName={inactiveClassName}
 										activeClassName={activeClassName}
 									>
 										All
@@ -43,6 +47,7 @@ export const Navbar = () => {
 									<ActiveLink
 										href="/collections"
 										className={className}
+										inactiveClassName={inactiveClassName}
 										activeClassName={activeClassName}
 									>
 										Collections
@@ -52,6 +57,7 @@ export const Navbar = () => {
 									<ActiveLink
 										href="/categories"
 										className={className}
+										inactiveClassName={inactiveClassName}
 										activeClassName={activeClassName}
 									>
 										Categories
@@ -61,6 +67,7 @@ export const Navbar = () => {
 									<ActiveLink
 										href={"/categories/t-shirts" as Route}
 										className={className}
+										inactiveClassName={inactiveClassName}
 										activeClassName={activeClassName}
 									>
 										T-shirts
@@ -70,6 +77,7 @@ export const Navbar = () => {
 									<ActiveLink
 										href={"/categories/hoodies" as Route}
 										className={className}
+										inactiveClassName={inactiveClassName}
 										activeClassName={activeClassName}
 									>
 										Hoodies
@@ -79,6 +87,7 @@ export const Navbar = () => {
 									<ActiveLink
 										href={"/categories/accessories" as Route}
 										className={className}
+										inactiveClassName={inactiveClassName}
 										activeClassName={activeClassName}
 									>
 										Accessories
