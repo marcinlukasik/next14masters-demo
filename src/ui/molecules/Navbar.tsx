@@ -1,6 +1,6 @@
 import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
-// import { type Route } from "next";
+import { type Route } from "next";
 import { Logo } from "@/ui/atoms/Logo";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { SearchBar } from "@/ui/atoms/SearchBar";
@@ -57,7 +57,7 @@ export const Navbar = () => {
 										Categories
 									</ActiveLink>
 								</li>
-								{/* <li>
+								<li>
 									<ActiveLink
 										href={"/categories/t-shirts" as Route}
 										className={className}
@@ -83,7 +83,7 @@ export const Navbar = () => {
 									>
 										Accessories
 									</ActiveLink>
-								</li> */}
+								</li>
 							</ul>
 						</div>
 					</div>
