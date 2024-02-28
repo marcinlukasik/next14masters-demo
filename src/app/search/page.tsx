@@ -1,5 +1,4 @@
-import { executeGraphql } from "@/api/graphqlApi";
-import { ProductsGetListBySearchDocument } from "@/gql/graphql";
+import { getProductsBySearch } from "@/api/products";
 import { searchCharactersLimit } from "@/ui/constants";
 import { ProductList } from "@/ui/organism/ProductList";
 
@@ -8,15 +7,13 @@ export default async function SearchPage({
 }: {
 	searchParams: { query: string };
 }) {
-	const { products } =
+	const products =
 		searchParams.query &&
 		searchParams.query.length >= searchCharactersLimit
-			? await executeGraphql(ProductsGetListBySearchDocument, {
-					search: searchParams.query,
-				})
-			: { products: { data: [] } };
+			? await getProductsBySearch(searchParams.query)
+			: [];
 
-	const total = products.data.length;
+	const total = products.length;
 
 	return (
 		<>
@@ -24,7 +21,7 @@ export default async function SearchPage({
 				Found {total} items for phrase &quot;{searchParams.query}
 				&quot;
 			</div>
-			<ProductList products={products.data} />
+			<ProductList products={products} />
 		</>
 	);
 }

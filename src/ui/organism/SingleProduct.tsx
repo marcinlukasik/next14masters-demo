@@ -1,4 +1,6 @@
+import { addProductToCartAction } from "@/actions/cart";
 import { type ProductListItemFragmentFragment } from "@/gql/graphql";
+import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
 import { ColorPicker } from "@/ui/atoms/ColorPicker";
 import { ProductImage } from "@/ui/atoms/ProductImage";
 import { SizePicker } from "@/ui/atoms/SizePicker";
@@ -44,6 +46,10 @@ export const SingleProduct = ({
 				<p className="mt-8 text-sm text-gray-900">
 					{product.description}
 				</p>
+				<form action={addProductToCartAction}>
+					<input type="hidden" name="productId" value={product.id} />
+					<AddToCartButton />
+				</form>
 			</div>
 		</article>
 	);

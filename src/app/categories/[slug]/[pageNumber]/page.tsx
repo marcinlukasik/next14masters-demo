@@ -1,22 +1,16 @@
 import { notFound } from "next/navigation";
 import { type Route, type Metadata } from "next";
-import { executeGraphql } from "@/api/graphqlApi";
-import { ProductsGetListByCategorySlugDocument } from "@/gql/graphql";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organism/ProductList";
 import { Heading } from "@/ui/atoms/Heading";
+import { getProductsByCategorySlug } from "@/api/products";
 
 export async function generateMetadata({
 	params,
 }: {
 	params: { slug: string };
 }): Promise<Metadata> {
-	const { category } = await executeGraphql(
-		ProductsGetListByCategorySlugDocument,
-		{
-			slug: params.slug,
-		},
-	);
+	const category = await getProductsByCategorySlug(params.slug);
 
 	if (!category) {
 		return {};
@@ -32,12 +26,7 @@ export default async function SingleCategoryPage({
 }: {
 	params: { slug: string; pageNumber: string };
 }) {
-	const { category } = await executeGraphql(
-		ProductsGetListByCategorySlugDocument,
-		{
-			slug: params.slug,
-		},
-	);
+	const category = await getProductsByCategorySlug(params.slug);
 
 	if (!category) {
 		notFound();

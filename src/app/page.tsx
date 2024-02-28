@@ -1,32 +1,17 @@
-import { executeGraphql } from "@/api/graphqlApi";
-import {
-	CategoriesGetListDocument,
-	CollectionsGetListDocument,
-	ProductsGetListDocument,
-} from "@/gql/graphql";
 import { Heading } from "@/ui/atoms/Heading";
 import { ProductList } from "@/ui/organism/ProductList";
 import { CollectionList } from "@/ui/organism/CollectionList";
 import { CategoryList } from "@/ui/organism/CategoryList";
+import {
+	getCategories,
+	getCollections,
+	getProducts,
+} from "@/api/products";
 
 export default async function Home() {
-	const { products } = await executeGraphql(ProductsGetListDocument, {
-		take: 4,
-	});
-
-	const { categories } = await executeGraphql(
-		CategoriesGetListDocument,
-		{
-			take: 3,
-		},
-	);
-
-	const { collections } = await executeGraphql(
-		CollectionsGetListDocument,
-		{
-			take: 3,
-		},
-	);
+	const products = await getProducts(4);
+	const categories = await getCategories(3);
+	const collections = await getCollections(3);
 
 	return (
 		<>
@@ -36,11 +21,11 @@ export default async function Home() {
 			</section>
 			<section className="mt-24">
 				<Heading>Most popular categories</Heading>
-				<CategoryList categories={categories.data} />
+				<CategoryList categories={categories} />
 			</section>
 			<section className="mt-24">
 				<Heading>Our Collections</Heading>
-				<CollectionList collections={collections.data} />
+				<CollectionList collections={collections} />
 			</section>
 		</>
 	);

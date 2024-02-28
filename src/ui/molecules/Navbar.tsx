@@ -1,9 +1,9 @@
-import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { type Route } from "next";
 import { Logo } from "@/ui/atoms/Logo";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { SearchBar } from "@/ui/atoms/SearchBar";
+import { ShoppingCart } from "@/ui/atoms/ShoppingCart";
 
 export const Navbar = () => {
 	const className =
@@ -98,10 +98,7 @@ export const Navbar = () => {
 					</div>
 					<div className="mx-4 flex items-center justify-between lg:mx-0">
 						<SearchBar />
-						<button className="flex gap-x-2 py-2 pl-3 text-gray-700 transition-colors duration-300 ease-in-out hover:text-orange-500">
-							<ShoppingBag size={24} />
-							<span className="relative -top-1 font-medium">2</span>
-						</button>
+						<ShoppingCart />
 					</div>
 				</div>
 			</nav>

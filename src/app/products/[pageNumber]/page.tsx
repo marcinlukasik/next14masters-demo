@@ -1,14 +1,11 @@
-import { executeGraphql } from "@/api/graphqlApi";
-import { ProductsGetListDocument } from "@/gql/graphql";
+import { getProducts } from "@/api/products";
 import { Heading } from "@/ui/atoms/Heading";
 import { paginationItemsPerPage } from "@/ui/constants";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organism/ProductList";
 
 export async function generateStaticParams() {
-	const { products } = await executeGraphql(ProductsGetListDocument, {
-		take: 0,
-	});
+	const products = await getProducts(paginationItemsPerPage);
 
 	const numberOfStaticPages = 3;
 	const total = products.data.length;
@@ -36,10 +33,7 @@ export default async function ProductsPage({
 	const skip =
 		(Number(params.pageNumber) - 1) * paginationItemsPerPage;
 
-	const { products } = await executeGraphql(ProductsGetListDocument, {
-		take: paginationItemsPerPage,
-		skip,
-	});
+	const products = await getProducts(paginationItemsPerPage, skip);
 
 	return (
 		<>
