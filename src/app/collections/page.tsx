@@ -3,7 +3,7 @@ import { Heading } from "@/ui/atoms/Heading";
 import { CollectionList } from "@/ui/organism/CollectionList";
 
 export default async function CollectionsPage() {
-	const collections = await getCollections();
+	const collections = await getCollections(0);
 
 	return (
 		<>
