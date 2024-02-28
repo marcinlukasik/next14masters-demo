@@ -1,5 +1,4 @@
 import { ImageResponse } from "next/og";
-import NextImage from "next/image";
 import { getProductById } from "@/api/products";
 
 export const runtime = "edge";
