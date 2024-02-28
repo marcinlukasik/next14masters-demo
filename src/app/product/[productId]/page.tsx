@@ -23,10 +23,6 @@ export async function generateMetadata({
 			title: product.name,
 			description: product.description,
 			type: "website",
-			images: product.images.map((image) => ({
-				url: image.url,
-				alt: image.alt,
-			})),
 		},
 	};
 }
