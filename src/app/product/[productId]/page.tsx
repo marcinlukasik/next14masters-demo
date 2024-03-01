@@ -4,7 +4,6 @@ import { Suspense } from "react";
 import { SingleProduct } from "@/ui/organism/SingleProduct";
 import { RelatedProductList } from "@/ui/organism/RelatedProductList";
 import { getProductById } from "@/api/products";
-import { Heading } from "@/ui/atoms/Heading";
 import { Reviews } from "@/ui/organism/Reviews";
 
 export async function generateMetadata({
