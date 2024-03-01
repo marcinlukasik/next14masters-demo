@@ -375,6 +375,27 @@ export type ProductsGetListBySearchQueryVariables = Exact<{
 
 export type ProductsGetListBySearchQuery = { products: { data: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> } };
 
+export type ReviewCreateMutationVariables = Exact<{
+  productId: Scalars['ID']['input'];
+  author: Scalars['String']['input'];
+  description: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  rating: Scalars['Int']['input'];
+  title: Scalars['String']['input'];
+}>;
+
+
+export type ReviewCreateMutation = { reviewCreate: { id: string } };
+
+export type ReviewListItemFragmentFragment = { author: string, description: string, id: string, rating: number, title: string, email: string };
+
+export type ReviewsGetListByProductIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ReviewsGetListByProductIdQuery = { product?: { reviews: Array<{ author: string, description: string, id: string, rating: number, title: string, email: string }> } | null };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -474,6 +495,16 @@ export const ProductListItemFragmentFragmentDoc = new TypedDocumentString(`
   }
 }
     `, {"fragmentName":"ProductListItemFragment"}) as unknown as TypedDocumentString<ProductListItemFragmentFragment, unknown>;
+export const ReviewListItemFragmentFragmentDoc = new TypedDocumentString(`
+    fragment ReviewListItemFragment on Review {
+  author
+  description
+  id
+  rating
+  title
+  email
+}
+    `, {"fragmentName":"ReviewListItemFragment"}) as unknown as TypedDocumentString<ReviewListItemFragmentFragment, unknown>;
 export const CartAddItemDocument = new TypedDocumentString(`
     mutation CartAddItem($productId: String!, $cartId: ID!, $quantity: Int!) {
   cartAddItem(
@@ -696,3 +727,33 @@ export const ProductsGetListBySearchDocument = new TypedDocumentString(`
     slug
   }
 }`) as unknown as TypedDocumentString<ProductsGetListBySearchQuery, ProductsGetListBySearchQueryVariables>;
+export const ReviewCreateDocument = new TypedDocumentString(`
+    mutation ReviewCreate($productId: ID!, $author: String!, $description: String!, $email: String!, $rating: Int!, $title: String!) {
+  reviewCreate(
+    author: $author
+    description: $description
+    email: $email
+    productId: $productId
+    rating: $rating
+    title: $title
+  ) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<ReviewCreateMutation, ReviewCreateMutationVariables>;
+export const ReviewsGetListByProductIdDocument = new TypedDocumentString(`
+    query ReviewsGetListByProductId($id: ID!) {
+  product(id: $id) {
+    reviews {
+      ...ReviewListItemFragment
+    }
+  }
+}
+    fragment ReviewListItemFragment on Review {
+  author
+  description
+  id
+  rating
+  title
+  email
+}`) as unknown as TypedDocumentString<ReviewsGetListByProductIdQuery, ReviewsGetListByProductIdQueryVariables>;
