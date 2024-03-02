@@ -16,9 +16,9 @@ export const AddNewReviewForm = ({
 	);
 
 	async function handleCreateReview(formData: FormData) {
-		const author = formData.get("author") as string;
-		const title = formData.get("title") as string;
-		const description = formData.get("description") as string;
+		const author = formData.get("name") as string;
+		const title = formData.get("headline") as string;
+		const description = formData.get("content") as string;
 		const rating = formData.get("rating") as string;
 		const email = formData.get("email") as string;
 
@@ -61,7 +61,7 @@ export const AddNewReviewForm = ({
 					<input
 						required
 						type="text"
-						name="title"
+						name="headline"
 						id="headline"
 						className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 outline-none ring-1 ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 focus:drop-shadow-md sm:text-sm"
 					/>
@@ -78,7 +78,7 @@ export const AddNewReviewForm = ({
 				<div className="mt-1">
 					<textarea
 						required
-						name="description"
+						name="content"
 						id="content"
 						className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 outline-none ring-1 ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 focus:drop-shadow-md sm:text-sm"
 					/>
@@ -108,7 +108,7 @@ export const AddNewReviewForm = ({
 					<input
 						required
 						type="text"
-						name="author"
+						name="name"
 						id="name"
 						className="block w-full rounded-md border-0 px-3 py-2 text-gray-900 outline-none ring-1 ring-gray-300 placeholder:text-gray-400  focus:ring-orange-600 focus:drop-shadow-md sm:text-sm"
 					/>
