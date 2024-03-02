@@ -8,6 +8,10 @@ import {
 	ProductsGetItemDocument,
 	ProductsGetListDocument,
 	ProductsGetListBySearchDocument,
+	ProductsGetListByOrderDocument,
+	type InputMaybe,
+	type ProductSortBy,
+	type SortDirection,
 } from "@/gql/graphql";
 
 export const getProductById = async (id: string) => {
@@ -56,6 +60,25 @@ export const getProductsBySearch = async (query: string) => {
 	});
 
 	return products.data;
+};
+
+export const getProductsByOrder = async (
+	take: number,
+	skip: number,
+	orderBy: InputMaybe<ProductSortBy>,
+	order: InputMaybe<SortDirection> | undefined,
+) => {
+	const { products } = await executeGraphql({
+		query: ProductsGetListByOrderDocument,
+		variables: {
+			take,
+			skip,
+			orderBy,
+			order,
+		},
+	});
+
+	return products;
 };
 
 export const getProducts = async (take: number, skip?: number) => {

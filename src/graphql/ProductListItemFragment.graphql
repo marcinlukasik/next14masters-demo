@@ -11,4 +11,7 @@ fragment ProductListItemFragment on Product {
 		name
 		slug
 	}
+	reviews {
+		rating
+	}
 }

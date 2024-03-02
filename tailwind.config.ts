@@ -17,7 +17,7 @@ const config: Config = {
 		},
 	},
 	safelist: ["bg-black", "bg-white", "bg-red-500"],
-	plugins: [],
+	plugins: [require("@tailwindcss/forms")],
 };
 // eslint-disable-next-line import/no-default-export
 export default config;

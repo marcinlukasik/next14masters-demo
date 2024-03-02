@@ -1,26 +1,37 @@
 import { type ProductListItemFragmentFragment } from "@/gql/graphql";
-import { formatPrice } from "@/ui/utils";
+import { Rating } from "@/ui/atoms/Rating";
+import { avarageRating, formatPrice } from "@/ui/utils";
 
 export const ProductListItemDescription = ({
-	product: { categories, name, price },
+	product: { categories, name, price, reviews },
 }: {
 	product: ProductListItemFragmentFragment;
 }) => {
 	return (
-		<div className="mt-2 flex justify-between">
-			<div>
+		<div className="mt-2">
+			<div className="flex items-center justify-between">
 				<h3 className="text-sm font-semibold text-gray-700">
 					{name}
 				</h3>
+				<p
+					className="text-sm font-medium text-gray-900"
+					data-testid="product-price"
+				>
+					{formatPrice(price)}
+				</p>
+			</div>
+			<div className="mt-1 flex items-center justify-between">
 				{categories[0] && (
-					<p className="mt-1 text-sm text-gray-500">
+					<p className="text-sm text-gray-500">
 						{categories[0].name}
 					</p>
 				)}
+				<Rating
+					rate={Number(avarageRating(reviews))}
+					size={16}
+					displayNumber={true}
+				/>
 			</div>
-			<p className="text-sm font-medium text-gray-900">
-				{formatPrice(price)}
-			</p>
 		</div>
 	);
 };

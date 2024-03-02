@@ -1,6 +1,5 @@
-import clsx from "clsx";
-import { Star } from "lucide-react";
 import { type ReviewListItemFragmentFragment } from "@/gql/graphql";
+import { Rating } from "@/ui/atoms/Rating";
 
 export const ReviewListItem = ({
 	review,
@@ -15,18 +14,7 @@ export const ReviewListItem = ({
 						{review.author}
 					</h4>
 					<div className="mt-2 flex items-center">
-						{[1, 2, 3, 4, 5].map((rating) => (
-							<Star
-								size={20}
-								className={clsx(
-									"fill-current",
-									review.rating >= rating
-										? "text-yellow-400"
-										: "text-gray-300",
-								)}
-								key={rating}
-							/>
-						))}
+						<Rating rate={review.rating} />
 					</div>
 				</div>
 			</div>

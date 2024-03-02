@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { type Route } from "next";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { type ReactNode } from "react";
 
 export const ActiveLink = ({
@@ -22,10 +22,16 @@ export const ActiveLink = ({
 	children: ReactNode;
 }) => {
 	const pathname = usePathname();
+	const searchParams = useSearchParams();
+
+	const parsedSearchParams = searchParams.toString();
+
 	const isActive =
 		exact || href === "/"
 			? pathname === href
-			: pathname.startsWith(href);
+			: parsedSearchParams
+				? pathname.startsWith(href.slice(0, href.indexOf("?")))
+				: pathname.startsWith(href);
 	const isAriaCurrent = isActive ? "page" : undefined;
 
 	return (
