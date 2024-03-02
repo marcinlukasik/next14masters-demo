@@ -12,6 +12,7 @@ export const ActiveLink = ({
 	activeClassName,
 	inactiveClassName,
 	exact,
+	searchParams,
 	children,
 }: {
 	href: Route;
@@ -19,13 +20,17 @@ export const ActiveLink = ({
 	activeClassName?: string;
 	inactiveClassName?: string;
 	exact?: boolean;
+	searchParams?: boolean;
 	children: ReactNode;
 }) => {
 	const pathname = usePathname();
+
 	const isActive =
 		exact || href === "/"
 			? pathname === href
-			: pathname.startsWith(href);
+			: searchParams
+				? pathname.startsWith(href.slice(0, href.indexOf("?")))
+				: pathname.startsWith(href);
 	const isAriaCurrent = isActive ? "page" : undefined;
 
 	return (

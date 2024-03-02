@@ -1,5 +1,4 @@
-import { executeGraphql } from "@/api/graphqlApi";
-import { ProductsGetListByCategorySlugDocument } from "@/gql/graphql";
+import { getProductsByCategorySlug } from "@/api/products";
 import { Heading } from "@/ui/atoms/Heading";
 import { ProductList } from "@/ui/organism/ProductList";
 
@@ -8,12 +7,7 @@ export const RelatedProductList = async ({
 }: {
 	slug: string;
 }) => {
-	const { category } = await executeGraphql(
-		ProductsGetListByCategorySlugDocument,
-		{
-			slug,
-		},
-	);
+	const category = await getProductsByCategorySlug(slug);
 
 	return (
 		category && (

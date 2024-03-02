@@ -5,10 +5,12 @@ export const Pagination = ({
 	total,
 	itemsPerPage,
 	route,
+	searchParams,
 }: {
 	itemsPerPage: number;
 	total: number;
 	route: Route;
+	searchParams?: string;
 }) => {
 	return (
 		<nav
@@ -23,7 +25,10 @@ export const Pagination = ({
 					return (
 						<li key={index}>
 							<ActiveLink
-								href={`${route}/${index + 1}` as Route}
+								href={
+									`${route}/${index + 1}${searchParams ?? ""}` as Route
+								}
+								searchParams={!!searchParams}
 								className={
 									"text-md p-2 font-medium text-gray-700 transition-colors duration-300 ease-in-out hover:text-orange-500"
 								}

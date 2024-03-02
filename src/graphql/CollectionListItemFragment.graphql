@@ -16,5 +16,8 @@ fragment CollectionListItemFragment on Collection {
 			name
 			slug
 		}
+		reviews {
+			rating
+		}
 	}
 }

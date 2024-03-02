@@ -1,19 +1,17 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { executeGraphql } from "@/api/graphqlApi";
-import { ProductsGetItemDocument } from "@/gql/graphql";
 import { SingleProduct } from "@/ui/organism/SingleProduct";
 import { RelatedProductList } from "@/ui/organism/RelatedProductList";
+import { getProductById } from "@/api/products";
+import { Reviews } from "@/ui/organism/Reviews";
 
 export async function generateMetadata({
 	params,
 }: {
 	params: { productId: string };
 }): Promise<Metadata> {
-	const { product } = await executeGraphql(ProductsGetItemDocument, {
-		id: params.productId,
-	});
+	const product = await getProductById(params.productId);
 
 	if (!product) {
 		return {};
@@ -26,10 +24,6 @@ export async function generateMetadata({
 			title: product.name,
 			description: product.description,
 			type: "website",
-			images: product.images.map((image) => ({
-				url: image.url,
-				alt: image.alt,
-			})),
 		},
 	};
 }
@@ -39,9 +33,7 @@ export default async function SingleProductPage({
 }: {
 	params: { productId: string };
 }) {
-	const { product } = await executeGraphql(ProductsGetItemDocument, {
-		id: params.productId,
-	});
+	const product = await getProductById(params.productId);
 
 	if (!product) {
 		notFound();
@@ -56,6 +48,9 @@ export default async function SingleProductPage({
 						product.categories[0] ? product.categories[0].slug : ""
 					}
 				/>
+			</Suspense>
+			<Suspense>
+				<Reviews productId={params.productId} />
 			</Suspense>
 		</>
 	);
