@@ -18,6 +18,9 @@ query CollectionsGetList($take: Int, $skip: Int) {
 					name
 					slug
 				}
+				reviews {
+					rating
+				}
 			}
 		}
 	}

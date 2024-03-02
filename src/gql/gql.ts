@@ -24,7 +24,7 @@ const documents = {
     "query CategoriesGetList($take: Int, $skip: Int) {\n  categories(take: $take, skip: $skip) {\n    data {\n      ...CategoryListItemFragment\n    }\n  }\n}": types.CategoriesGetListDocument,
     "fragment CategoryListItemFragment on Category {\n  id\n  name\n  slug\n  description\n}": types.CategoryListItemFragmentFragmentDoc,
     "fragment CollectionListItemFragment on Collection {\n  name\n  id\n  description\n  slug\n  products {\n    name\n    price\n    images {\n      alt\n      url\n    }\n    id\n    description\n    categories {\n      name\n      slug\n    }\n    reviews {\n      rating\n    }\n  }\n}": types.CollectionListItemFragmentFragmentDoc,
-    "query CollectionsGetList($take: Int, $skip: Int) {\n  collections(take: $take, skip: $skip) {\n    data {\n      name\n      id\n      description\n      slug\n      products {\n        name\n        price\n        images {\n          alt\n          url\n        }\n        id\n        description\n        categories {\n          name\n          slug\n        }\n      }\n    }\n  }\n}": types.CollectionsGetListDocument,
+    "query CollectionsGetList($take: Int, $skip: Int) {\n  collections(take: $take, skip: $skip) {\n    data {\n      name\n      id\n      description\n      slug\n      products {\n        name\n        price\n        images {\n          alt\n          url\n        }\n        id\n        description\n        categories {\n          name\n          slug\n        }\n        reviews {\n          rating\n        }\n      }\n    }\n  }\n}": types.CollectionsGetListDocument,
     "fragment ProductListItemFragment on Product {\n  name\n  price\n  images {\n    alt\n    url\n  }\n  id\n  description\n  categories {\n    name\n    slug\n  }\n  reviews {\n    rating\n  }\n}": types.ProductListItemFragmentFragmentDoc,
     "query ProductsGetListByCollectionSlug($slug: String!) {\n  collection(slug: $slug) {\n    ...CollectionListItemFragment\n  }\n}": types.ProductsGetListByCollectionSlugDocument,
     "query ProductsGetItem($id: ID!) {\n  product(id: $id) {\n    ...ProductListItemFragment\n  }\n}": types.ProductsGetItemDocument,
@@ -80,7 +80,7 @@ export function graphql(source: "fragment CollectionListItemFragment on Collecti
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query CollectionsGetList($take: Int, $skip: Int) {\n  collections(take: $take, skip: $skip) {\n    data {\n      name\n      id\n      description\n      slug\n      products {\n        name\n        price\n        images {\n          alt\n          url\n        }\n        id\n        description\n        categories {\n          name\n          slug\n        }\n      }\n    }\n  }\n}"): typeof import('./graphql').CollectionsGetListDocument;
+export function graphql(source: "query CollectionsGetList($take: Int, $skip: Int) {\n  collections(take: $take, skip: $skip) {\n    data {\n      name\n      id\n      description\n      slug\n      products {\n        name\n        price\n        images {\n          alt\n          url\n        }\n        id\n        description\n        categories {\n          name\n          slug\n        }\n        reviews {\n          rating\n        }\n      }\n    }\n  }\n}"): typeof import('./graphql').CollectionsGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

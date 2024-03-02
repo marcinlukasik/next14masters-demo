@@ -336,7 +336,7 @@ export type CollectionsGetListQueryVariables = Exact<{
 }>;
 
 
-export type CollectionsGetListQuery = { collections: { data: Array<{ name: string, id: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> }> } };
+export type CollectionsGetListQuery = { collections: { data: Array<{ name: string, id: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }>, reviews: Array<{ rating: number }> }> }> } };
 
 export type ProductListItemFragmentFragment = { name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }>, reviews: Array<{ rating: number }> };
 
@@ -622,6 +622,9 @@ export const CollectionsGetListDocument = new TypedDocumentString(`
         categories {
           name
           slug
+        }
+        reviews {
+          rating
         }
       }
     }
