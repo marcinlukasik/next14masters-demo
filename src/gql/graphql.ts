@@ -328,7 +328,7 @@ export type CategoriesGetListQuery = { categories: { data: Array<{ id: string, n
 
 export type CategoryListItemFragmentFragment = { id: string, name: string, slug: string, description: string };
 
-export type CollectionListItemFragmentFragment = { name: string, id: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> };
+export type CollectionListItemFragmentFragment = { name: string, id: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }>, reviews: Array<{ rating: number }> }> };
 
 export type CollectionsGetListQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
@@ -345,7 +345,7 @@ export type ProductsGetListByCollectionSlugQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetListByCollectionSlugQuery = { collection?: { name: string, id: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }> }> } | null };
+export type ProductsGetListByCollectionSlugQuery = { collection?: { name: string, id: string, description: string, slug: string, products: Array<{ name: string, price: number, id: string, description: string, images: Array<{ alt: string, url: string }>, categories: Array<{ name: string, slug: string }>, reviews: Array<{ rating: number }> }> } | null };
 
 export type ProductsGetItemQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -486,6 +486,9 @@ export const CollectionListItemFragmentFragmentDoc = new TypedDocumentString(`
     categories {
       name
       slug
+    }
+    reviews {
+      rating
     }
   }
 }
@@ -648,6 +651,9 @@ export const ProductsGetListByCollectionSlugDocument = new TypedDocumentString(`
     categories {
       name
       slug
+    }
+    reviews {
+      rating
     }
   }
 }`) as unknown as TypedDocumentString<ProductsGetListByCollectionSlugQuery, ProductsGetListByCollectionSlugQueryVariables>;
