@@ -28,6 +28,7 @@ export const Pagination = ({
 								href={
 									`${route}/${index + 1}${searchParams ?? ""}` as Route
 								}
+								searchParams={!!searchParams}
 								className={
 									"text-md p-2 font-medium text-gray-700 transition-colors duration-300 ease-in-out hover:text-orange-500"
 								}
