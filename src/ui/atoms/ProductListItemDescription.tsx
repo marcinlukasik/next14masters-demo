@@ -1,9 +1,9 @@
 import { type ProductListItemFragmentFragment } from "@/gql/graphql";
 import { Rating } from "@/ui/atoms/Rating";
-import { avarageRating, formatPrice } from "@/ui/utils";
+import { formatPrice } from "@/ui/utils";
 
 export const ProductListItemDescription = ({
-	product: { categories, name, price, reviews },
+	product: { categories, name, price, rating },
 }: {
 	product: ProductListItemFragmentFragment;
 }) => {
@@ -26,11 +26,13 @@ export const ProductListItemDescription = ({
 						{categories[0].name}
 					</p>
 				)}
-				<Rating
-					rate={Number(avarageRating(reviews))}
-					size={16}
-					displayNumber={true}
-				/>
+				{rating && (
+					<Rating
+						rate={Number(rating.toFixed(2))}
+						size={16}
+						displayNumber={true}
+					/>
+				)}
 			</div>
 		</div>
 	);
